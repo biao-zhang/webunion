@@ -52,6 +52,15 @@
         verifyCode: '',
       }
     },
+    created(){
+      let $this = this;
+      document.onkeydown=function(e) {
+        var key = window.event.keyCode;
+        if (key == 13) {
+          $this.next();
+        }
+      }
+    },
     methods: {
       captchaToken(val) {
         this.imgtoken = val

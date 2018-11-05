@@ -1,26 +1,30 @@
 <template>
   <div class="lm_Banner">
     <div class="banner">
-      <ul id="slides" class="slide">
-        <li v-for="item in picture">
+      <Carousel v-if="picture" :interval="5000" arrow="always"  class="slide">
+        <Carousel-item  v-for="(item,index) in picture" :key="index">
           <a
             :href="item.advLinkurl"
             target="_blank"
             :style="{ background: 'url('+ file_imgSrc + item.advPicpath +') no-repeat center center'}"
           ></a>
-        </li>
-      </ul>
+        </Carousel-item>
+      </Carousel>
     </div>
+
   </div>
 </template>
 
 <script>
-  import "@/assets/web/js/jquery.js"
-  import "@/assets/web/js/banner.js"
   import { advlist } from '@/api/web/cm'
+  import {Carousel,CarouselItem} from 'element-ui'
 
   export default {
     name: "banner",
+    components:{
+      Carousel,
+      CarouselItem
+    },
     data () {
       return{
         file_imgSrc: this.GLOBAL.file_imgSrc,
@@ -40,6 +44,7 @@
         let params = {
           advboardId: id,
           advAvlstatus: 'Y',
+          advDelstatus: 'Y',
         }
         advlist({
           params: JSON.stringify(params)
@@ -69,4 +74,12 @@
     }
   }
 </script>
-
+<style>
+  .el-carousel__indicators{bottom:20px;}
+  .el-carousel{height: 100%;width:100%;}
+  .el-carousel__container{height: 100%;width:100%;}
+  .el-carousel__item{height: 100%;width:100%;}
+  .el-carousel__item a{
+    display: block;height: 100%;width:100%;}
+  .el-carousel__button{background: none;}
+  </style>

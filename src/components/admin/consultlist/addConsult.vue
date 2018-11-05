@@ -19,11 +19,11 @@
           </div>
           <div class="rest_lab">
             <span class="rest_name">排序编号：</span>
-            <input type="text" class="rest_inp" v-model="articleOrdernum"/>
+            <input type="text" class="rest_inp" v-model="articleSeq"/>
           </div>
           <div class="rest_lab">
             <span class="rest_name">创建人：</span>
-            <input type="text" class="rest_inp" v-model="articleAuthor"/>
+            <input type="text" class="rest_inp" v-model="articleInputer"/>
           </div>
           <div class="rest_lab">
             <span class="rest_name">外部链接：</span>
@@ -84,6 +84,7 @@
         articleHotstatus:'',	//文章热点状态
         articleTurnurl:'',//外部链接地址
         articleCopyfrom:'',	//文章来源
+        articleInputer:'',//文章录入者
         articleAuthor:'',//文章作者
         articleCreatetime:'',	//文章创建时间
         articleSubscribe:'',	//文章摘要
@@ -98,7 +99,7 @@
         articleShowstatuswap:'Y',//	文章显示状态WAP
         articleShowstatuspc:'Y',//	文章显示状态PC
         articleShowstatusapp:'Y',//	文章显示状态APP
-        articleOrdernum:'',//排序编号
+        articleSeq:'',//排序编号
         articleTurnurlStatus:'N',//是否是外部链接
 
         type:this.$route.query.type,
@@ -145,6 +146,7 @@
           articleHotstatus:this.articleHotstatus,	//文章热点状态
           articleTurnurl:this.articleTurnurl,//是否外部链接
           articleCopyfrom:this.articleCopyfrom,	//文章来源
+          articleInputer:this.articleInputer,//文章录入者
           articleAuthor:this.articleAuthor,//文章作者
           articleCreatetime:this.articleCreatetime,	//文章创建时间
           articleSubscribe:this.articleSubscribe,	//文章摘要
@@ -159,7 +161,7 @@
           articleShowstatuswap:this.articleShowstatuswap,//	文章显示状态WAP
           articleShowstatuspc:this.articleShowstatuspc,//	文章显示状态PC
           articleShowstatusapp:this.articleShowstatusapp,//	文章显示状态APP
-          articleOrdernum:this.articleOrdernum,//排序编号
+          articleSeq:this.articleSeq,//排序编号
         }
         articleadd({
           params: JSON.stringify(params)
@@ -192,7 +194,7 @@
           if(res.result==="000000"){
             this.articleTitle = res.data.articleTitle;
             this.classId = res.data.classId;
-            this.articleOrdernum = res.data.articleOrdernum;
+            this.articleSeq = res.data.articleSeq;
             this.articleAuthor = res.data.articleAuthor;
             this.articleTurnurl = res.data.articleTurnurl;
             if(this.articleTurnurl==='') {
@@ -221,6 +223,7 @@
           articleHotstatus:this.articleHotstatus,	//文章热点状态
           articleTurnurl:this.articleTurnurl,//是否外部链接
           articleCopyfrom:this.articleCopyfrom,	//文章来源
+          articleInputer:this.articleInputer,//文章录入者
           articleAuthor:this.articleAuthor,//文章作者
           articleCreatetime:this.articleCreatetime,	//文章创建时间
           articleSubscribe:this.articleSubscribe,	//文章摘要
@@ -235,7 +238,7 @@
           articleShowstatuswap:this.articleShowstatuswap,//	文章显示状态WAP
           articleShowstatuspc:this.articleShowstatuspc,//	文章显示状态PC
           articleShowstatusapp:this.articleShowstatusapp,//	文章显示状态APP
-          articleOrdernum:this.articleOrdernum,//排序编号
+          articleSeq:this.articleSeq,//排序编号
         }
         articleedit({
           params: JSON.stringify(params)

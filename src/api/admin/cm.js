@@ -26,6 +26,11 @@ export const advdelete = (params) => {
   return http.fetchPost(`${baseUrl}/adv/delete`,params)
 }
 
+// 广告禁用
+export const advavlstatus = (params) => {
+  return http.fetchPost(`${baseUrl}/adv/avlstatus`,params)
+}
+
 // 栏目添加
 export const classadd = (params) => {
   return http.fetchPost(`${baseUrl}/class/add`,params)

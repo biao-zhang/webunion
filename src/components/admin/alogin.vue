@@ -7,7 +7,7 @@
         <div class="lorg_lab"><input v-model="userName" type="text" class="lo_user" placeholder="请输入用户名/邮箱" /></div>
         <div class="lorg_lab"><input v-model="pwd" type="password" class="lo_pass" placeholder="请输入密码" /></div>
         <div class="lorg_lab">
-          <input class="lo_capt" v-model="captcha" type="text" placeholder="请输入图形验证码" />
+          <input class="lo_capt" v-model="captcha" type="text" placeholder="请输入图形验证码"/>
           <captcha-image @captchaToken="captchaToken"></captcha-image>
         </div>
         <div class="lobn_box"><input type="button" value="登 录" class="lorg_btn" @click="login"></div>
@@ -19,7 +19,7 @@
 <script>
   import { uclogin} from '@/api/admin/uc'
   import CaptchaImage from './captchaImage'
-  import { checkEmail } from '../../../static/js/utils'
+  import { checkEmail } from "../../config/mUtils";
 
   export default {
     name: "alogin",
@@ -36,8 +36,17 @@
         imgtoken: '',
       }
     },
+    created(){
+      let $this = this;
+      document.onkeydown=function(e) {
+        var key = window.event.keyCode;
+        if (key == 13) {
+          $this.login();
+        }
+      }
+    },
     methods: {
-      captchaToken (val) {
+      captchaToken (val){
         this.imgtoken = val
       },
       login () {

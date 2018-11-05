@@ -32,6 +32,15 @@
       }
     },
     props: ['verifyToken', 'userMobile'],
+    created(){
+      let $this = this;
+      document.onkeydown=function(e) {
+        var key = window.event.keyCode;
+        if (key == 13) {
+          $this.over();
+        }
+      }
+    },
     methods: {
       over () {
         if (this.userLoginpwd1 === this.userLoginpwd2) {

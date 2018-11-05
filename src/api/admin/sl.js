@@ -96,4 +96,9 @@ export const agentsiteauth = (params) => {
   return http.fetchPost(`${baseUrl}/agentsite/auth`,params)
 }
 
+// 代理商添加
+export const agentadd = (params) => {
+  return http.fetchPost(`${baseUrl}/agent/add`,params)
+}
+
 

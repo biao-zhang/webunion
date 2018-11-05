@@ -24,3 +24,42 @@ function tips(str,callback1){
 		if(callback1!=null&&callback1!="") callback1();
 	});
 }
+
+$(document).on('click','.lma_img',function () {
+  var url = $(this).attr("src");
+  showImg(url);
+});
+// 显示图片
+function showImg(url){
+  var sH = $(window).height();
+  var sW = $(window).width();
+  $("body").append('<div class="qupy_zz"></div>'+
+    '<div class="qupy_ss">'+
+    '<i class="dy_close"></i>'+
+    '<img src="'+url+'"/>'+
+    '</div>');
+  var iH,iW,
+    yH = $(".qupy_ss img").height(),
+    yW = $(".qupy_ss img").width();
+  if(yW <= (sW-100)){
+    iW = yW;
+    iH = yH;
+  }else{
+    iW = sW-100;
+    iH = iW / yW * yH;
+  }
+  if(iH <= (sH-100)){
+    iH = iH;
+    iW = iW;
+  }else{
+    iH = sH-100;
+    iW = iH / yH * yW ;
+  }
+  $(".qupy_ss img").height(iH).width(iW);
+  $(".qupy_ss").height(iH).width(iW);
+  $(".qupy_ss").css("top",(sH-iH)/2+"px").css("left",(sW-iW)/2+"px");
+  $(".dy_close").click(function(){
+    $(".qupy_zz").remove();
+    $(this).parent(".qupy_ss").remove();
+  });
+}

@@ -56,6 +56,11 @@ const web = {
     },
     {
       //课程广告模板
+      path: 'classtheme',
+      component: classtheme
+    },
+    {
+      //课程广告列表模板
       path: 'classlisttheme',
       component: classlisttheme
     },

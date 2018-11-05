@@ -21,6 +21,9 @@ import '../static/UE/ueditor.all.js'
 import '../static/UE/lang/zh-cn/zh-cn.js'
 import '../static/UE/ueditor.parse.js'
 
+
+
+
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false

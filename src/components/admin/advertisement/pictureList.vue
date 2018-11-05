@@ -113,7 +113,7 @@
         adv_EndDate:"",
         advAvlstatus:'',
         advStatusOptions:[{value:"Y",label:"正常"},{value:"N",label:"禁用"}],
-        pageIndex:1,
+        pageIndex:0,
         pageSize:8,
         imageadvlist:[{
           advId:'0526389',
@@ -182,7 +182,7 @@
         this.projectId = msg;
       },
       handleCurrentChange(val){
-        this.pageIndex = val;
+        this.pageIndex = (val-1)*this.pageSize;
         this.query();
       }
     }

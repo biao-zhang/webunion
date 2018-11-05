@@ -93,7 +93,7 @@ export default {
         advAvlstatus: '',
         className: '',
         classTeachmethod: '',
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10,
 
         value1: '',
@@ -211,7 +211,7 @@ export default {
       },
 
       handleCurCha (val) {
-        this.pageIndex = val
+        this.pageIndex = (val-1)*this.pageSize
         this._singleAdvclasslist()
       },
 

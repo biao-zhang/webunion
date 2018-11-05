@@ -66,7 +66,6 @@
         <pagination
           background
           layout="prev, pager, next"
-          :current-page="pageIndex"
           :page-size="pageSize"
           :total="count"
           @current-change="handleCurCha"
@@ -92,7 +91,7 @@
     data () {
       return {
         className: '',
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 6,
 
         isFront: true,
@@ -215,7 +214,7 @@
       },
 
       handleCurCha (val) {
-        this.pageIndex = val
+        this.pageIndex = (val-1)*this.pageSize
         this._complexlist()
       }
     }

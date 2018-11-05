@@ -37,7 +37,7 @@ textarea{resize:none;outline: none;}
 .co_name{color: #333;font-size:20px;padding-right: 50px;}
 .quit{display: inline-block;width:26px;height: 27px;background: url("../images/h_close.png") no-repeat;cursor: pointer;position: absolute;right:0;top:26px;}
 /*右侧内容区*/
-.cont_con{position: absolute;top:100px;left: 0;right: 0;bottom: 0;background: #fff;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
+.cont_con{position: absolute;top:100px;left: 0;right: 0;bottom: 0;overflow-y:auto;background: #fff;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
 
 /*查询条件*/
 .lmad_tt{position: relative;margin:20px;}
@@ -58,17 +58,17 @@ textarea{resize:none;outline: none;}
 /*table*/
 .lma_box{padding:0 20px;}
 .sh_btn{width:130px;height: 40px;line-height: 40px;text-align: center;background: #fff;border:1px solid #eb3434;color: #eb3434;font-size: 18px;border-radius: 2px;cursor: pointer;margin:20px 0;}
-.lmad_con{min-height:320px;max-height:400px;overflow:auto;}
+.lmad_con{min-height:320px;overflow:auto;}
 .lmad_con table{width:100%;min-width:1500px;}
 .lmad_con table tr th{line-height: 48px;border:1px solid #eeeeee;background: #f5f5f5;color: #333;font-size: 16px;}
 .lmad_con table tr td{line-height: 42px;border:1px solid #eeeeee;color: #333;font-size: 14px;text-align: center;position: relative;}
 .lma_a{font-size: 14px;color: #fc635e;}
 .lma_img{width:50px;height: 28px;display: inline-block; vertical-align: middle;cursor: pointer;}
-.lma_img:hover{position: absolute;left:0;top:0;width:auto;height: auto;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;z-index: 11;}
+/*.lma_img:hover{position: absolute;left:0;top:0;width:auto;height: auto;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;z-index: 11;}*/
 .ch_fg{display: inline-block;width:16px;height: 16px;background: url("../images/h_uncheck1.png") no-repeat;}
 .ch_fg.check{background: url("../images/h_check1.png") no-repeat;}
 /*分页*/
-.page{text-align: center;margin:30px 0;}
+.page{text-align: center;padding:30px 0;}
 .page a,.page span{display: inline-block;width:38px;height:28px;text-align: center;line-height: 28px;border:1px solid #d4d4d4;font-size: 14px;color:#999;border-radius: 2px;}
 .page a:hover,.page a.active{background:#fc635e;color:#fff;border:1px solid #fc635e;}
 /*添加*/
@@ -139,6 +139,9 @@ textarea{resize:none;outline: none;}
 .lm_Banner .banner #pagination li {display:block;list-style:none;width:70px;height:4px;background:url(../images/lm_ban.png);margin:2px 0 0 10px;background-position: 0 -4px;cursor: pointer;float: left;}
 .lm_Banner .banner #pagination li a {display:block;width:100%;height:100%;padding:0;margin:0;text-indent:-9999px;}
 .lm_Banner .banner #pagination li.current {background-position:0 0;}
+
+.el-carousel__indicator{width:70px;height:4px;background:url(../images/lm_ban.png);margin:2px 0 0 10px;background-position: 0 -4px;cursor: pointer;padding:0;bottom:20px;}
+.el-carousel__indicator.is-active{background-position:0 0;}
 /*首页-联盟优势*/
 .lm_advanbox{width:1100px;margin:0 auto;padding-top: 50px;overflow:hidden; }
 .lmvn_tt{text-align: center;background: url("../images/lm_fg10.png") no-repeat center bottom;padding:20px 0;}
@@ -235,8 +238,8 @@ textarea{resize:none;outline: none;}
 .rest_num{width:50px;height: 38px;line-height: 38px;padding-left:10px;border:1px solid #e1e1e1;}
 
 /*新增网站弹框*/
-.web_zz{position: fixed;left:0;right:0;top:0;bottom:0;background: #000;z-index: 100;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;display: none;}
-.web_box{position: fixed;width:540px;height: 500px;z-index: 101;left:50%;top:50%;margin:-250px 0 0 -270px;background: #fff;border-radius: 5px;overflow:hidden;display: none;}
+.web_zz{position: fixed;left:0;right:0;top:0;bottom:0;background: #000;z-index: 100;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;display: block;}
+.web_box{position: fixed;width:540px;height: 500px;z-index: 101;left:50%;top:50%;margin:-250px 0 0 -270px;background: #fff;border-radius: 5px;overflow:hidden;display: block;}
 .web_tt{height: 74px;line-height: 74px;background: #eef0f5;padding:0 35px;}
 .web_tt span{color: #333;font-size: 28px;}
 .web_close{display: inline-block;width:16px;height: 16px;background: url("../images/lm_close.png") no-repeat;position: absolute;right:35px;top:29px;cursor: pointer;}
@@ -246,8 +249,9 @@ textarea{resize:none;outline: none;}
 .web_inp{width:260px;height: 28px;line-height: 28px;padding-left: 10px;border: 1px solid #e0e0e0;border-radius: 2px;}
 .web_area{width:365px;height: 115px;padding:5px;border: 1px solid #e0e0e0;border-radius: 2px;}
 .web_bm{padding:10px 0 0;}
-.web_submit{width:89px;height: 33px;background: #fc635e;border:1px solid #fc635e;border-radius: 2px;color:#fff;font-size:16px; }
-.web_cancel{width:89px;height: 33px;background: #fff;border:1px solid #e0e0e0;border-radius: 2px;color:#666;font-size:16px;}
+.web_submit{width:89px;height: 33px;background: #fc635e;border:1px solid #fc635e;border-radius: 2px;color:#fff;font-size:16px;
+  cursor: pointer;}
+.web_cancel{width:89px;height: 33px;background: #fff;border:1px solid #e0e0e0;border-radius: 2px;color:#666;font-size:16px;cursor: pointer;}
 
 /*广告代码弹框*/
 .adcode_zz{position: fixed;left:0;right:0;top:0;bottom:0;background: #000;z-index: 100;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;display: block;}
@@ -263,7 +267,7 @@ textarea{resize:none;outline: none;}
 /*帮助中心*/
 .lm_content{width:1100px;margin:40px auto;overflow:hidden;}
 .lmc_lf{width:240px;min-height:680px;float: left;background: #fff;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
-.lmc_lf ul li{line-height: 50px;border-left: 4px solid #fff;height: 50px;position: relative;}
+.lmc_lf ul li{line-height: 50px;border-left: 4px solid #fff;position: relative;}
 .lmc_lf ul li a{color: #333;font-size: 16px;padding-left: 20px;display: inline-block;width:218px;}
 .lmc_arr{display: inline-block;width:15px;height: 8px;background: url("../images/lm_arr.png") no-repeat;position: absolute;right:24px;top:18px;cursor: pointer;}
 .lmc_arr.up{background-position:0 -8px;}
@@ -288,13 +292,13 @@ textarea{resize:none;outline: none;}
 .lmfo_img{width:76px;float: left;}
 .lmfo_p{padding-left: 100px;}
 .lmfo_tit{font-size: 18px;color: #333;padding: 10px 0 5px;}
-.lmfo_rz{color: #fc635e;font-size: 14px;display: inline-block;background: url("../images/lm_fg2.png") no-repeat left center;padding-left: 28px;}
+.lmfo_rz{color: #fc635e;font-size: 14px;display: inline-block;background: url("../images/lm_fg2.png") no-repeat left center;padding-left: 28px;cursor: pointer;}
 .lmfp_p{clear: both;padding-top: 30px;}
 .lmfp_p span{font-size: 14px;color: #999;display: inline-block;width:33%;float: left;}
 .lmfp_p span strong{color: #333;font-weight: normal;}
-.lmfp_p span.lmfp_lf{text-align: left;}
-.lmfp_p span.lmfp_cn{text-align: center;}
-.lmfp_p span.lmfp_rt{text-align: right;}
+.lmfp_p span.lmfp_lf{text-align: left;width:30%;}
+.lmfp_p span.lmfp_cn{text-align: center;width:40%;}
+.lmfp_p span.lmfp_rt{text-align: right;width:30%;}
 /*个人首页-昨天流量*/
 .lm_ztll{background: #fff;min-height:485px;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
 .ztll_tt{padding:25px 30px 20px;}
@@ -332,7 +336,7 @@ textarea{resize:none;outline: none;}
 .lmad_con table tr td{line-height: 42px;border:1px solid #eeeeee;color: #333;font-size: 14px;text-align: center;position: relative;}
 .lma_a{font-size: 14px;color: #fc635e;}
 .lma_img{width:50px;height: 28px;display: inline-block; vertical-align: middle;cursor: pointer;}
-.lma_img:hover{position: absolute;left:-50%;top:-50%;width:auto;height: auto;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;z-index: 11;}
+/*.lma_img:hover{position: absolute;left:-50%;top:-50%;width:auto;height: auto;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;z-index: 11;}*/
 /*课程广告*/
 .lm_sxk{background: #fff;padding:10px 25px;margin-bottom:35px;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
 .sxk_item span{color: #333;font-size: 16px;display: inline-block;line-height: 24px;padding:5px 0 5px 0px;width:50px;float:left;margin-top: 5px;font-weight: bold;}
@@ -364,7 +368,7 @@ textarea{resize:none;outline: none;}
 .lma_time{width:138px;height: 34px;line-height: 34px;border:1px solid #e1e1e1;background: #f5f5f5;border-radius: 2px;}
 .lma_tsp{margin:0 15px;}
 /*个人信息*/
-.lmc_basebox{background: #fff;min-height:680px;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
+.lmc_basebox{background: #fff;min-height:650px;padding:0 0 30px;-moz-box-shadow:0px 0px 15px #e8e7e7; -webkit-box-shadow:0px 0px 15px #e8e7e7; box-shadow:0px 0px 15px #e8e7e7;}
 .lmcbs_tit{text-align: center;padding:25px 0 15px;border-bottom: 1px solid #e5e5e5;}
 .lmcbs_img{width:85px;height: 85px;position: relative;margin:0 auto;}
 .lmcf_file{position: absolute;width:100%;height: 100%;top:0;left:0;filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;cursor: pointer;}
@@ -378,7 +382,7 @@ textarea{resize:none;outline: none;}
 .lmcbs_con{width:380px;margin:0 auto;padding: 30px 0;}
 .lmcbs_item{padding-bottom: 20px;}
 .lmcb_lab{display: block;line-height: 34px;}
-.lmcp_sp1{color: #999;font-size: 14px;display: inline-block;width:150px;text-align: right;float: left;}
+.lmcp_sp1{color: #999;font-size: 14px;display: inline-block;width:150px;text-align: right;}
 .lmcp_sp2{color: #333;font-size: 14px;}
 .lmcp_sp1 font{color:#fc635e;}
 .lmcbs_info.update .lmcb_lab{margin-top: 10px;}
@@ -390,7 +394,8 @@ textarea{resize:none;outline: none;}
 .webm_con table{width:1000px;}
 .webm_con table tr th{line-height: 48px;border:1px solid #eeeeee;background: #f5f5f5;color: #333;font-size: 16px;}
 .webm_con table tr td{line-height: 42px;border:1px solid #eeeeee;color: #333;font-size: 14px;text-align: center;position: relative;}
-.webm_del{color: #333;font-size: 14px;}
+.webm_del{color: #333;font-size: 14px;margin:0 5px;}
+.webm_del:hover{color:#fc635e;}
 .webm_a{color: #333;font-size: 14px;}
 .webm_con table tr td p{color: #333;font-size: 14px;line-height: 20px;padding:5px;}
 /*推广效果*/
@@ -419,9 +424,15 @@ textarea{resize:none;outline: none;}
 .lmbg_detail{padding:20px 0 10px;}
 .lmbgdt_con{width:750px;height: 230px;}
 .lmbg_btnbox{text-align: center;padding:20px 0 0;}
-.lmbg_btn{width:230px;height: 35px;background: #fc635e;color: #fff;font-size: 18px;border:none;border-radius: 2px;}
+.lmbg_btn{width:230px;height: 35px;background: #fc635e;color: #fff;font-size: 18px;border:none;border-radius: 2px;cursor: pointer;}
 /*课程列表模板*/
 .classlist_theme{width:530px;background: #fff;}
 .classlist_theme table{width:100%;}
 .classlist_theme table tr th{line-height: 48px;border:1px solid #eeeeee;background: #f5f5f5;color: #333;font-size: 16px;}
 .classlist_theme table tr td{line-height: 42px;border:1px solid #eeeeee;color: #333;font-size: 14px;text-align: center;position: relative;}
+
+/*查看图片*/
+.qupy_zz{position: fixed;top:0;left:0;bottom:0;right:0;background: #000;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.5;z-index: 99;}
+.qupy_ss{position: fixed;top:50px;z-index: 999;border-radius: 5px;border:1px solid #908989;}
+.qupy_ss img{border-radius: 5px;}
+.qupy_ss i{width:26px;height:26px;display: inline-block;background: url("../images/dy_close.png") no-repeat;position: absolute;top:-13px;right:-13px;cursor: pointer;}

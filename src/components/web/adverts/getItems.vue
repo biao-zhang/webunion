@@ -84,7 +84,7 @@
       },
       _secondprojectlist(){
         let params = {
-          advType : this.advType, //文字广告名称
+          advType : this.advType, //广告类型
         }
         secondprojectlist({
           params: JSON.stringify(params)
@@ -102,7 +102,8 @@
       },
       _subjectlist(){
         let params = {
-          projectId : this.projectId, //文字广告名称
+          projectId : this.projectId, //项目id
+          advType : this.advType, //广告类型
         }
         subjectlist({
           params: JSON.stringify(params)
@@ -120,7 +121,8 @@
       },
       _classtypelist(){
         let params = {
-          projectId : this.projectId, //文字广告名称
+          projectId : this.projectId, //项目id
+          advType : this.advType, //广告类型
         }
         classtypelist({
           params: JSON.stringify(params)

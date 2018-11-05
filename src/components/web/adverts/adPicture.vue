@@ -24,7 +24,7 @@
           <td>{{item.projectName}}</td>
           <td>{{item.advPicsize}}</td>
           <td><img v-bind:src=file_imgSrc+item.advPicpath class="lma_img"></td>
-          <td><a href="javascript:void(0);" class="lma_a">获取代码链接</a></td>
+          <td><a href="javascript:void(0);" class="lma_a"  @click="getAdCode(item.advId)">获取代码链接</a></td>
         </tr>
       </table>
       <div class="page" v-show="count>pageSize">
@@ -60,7 +60,7 @@
           value:'',
           advType:'2',//广告类型：2图片广告
           advName:'',//广告名称
-          pageIndex:1,//当前页码
+          pageIndex:0,//当前页码
           pageSize:8,//每页显示数量
           count:0,//总数量
           picadvlist:'',//
@@ -108,9 +108,12 @@
           this.projectId = msg;
         },
         handleCurrentChange(val){
-          this.pageIndex = val;
+          this.pageIndex = (val-1)*this.pageSize;
           this.query();
-        }
+        },
+        getShow(msg){
+          this.show = msg;
+        },
       }
     }
 </script>

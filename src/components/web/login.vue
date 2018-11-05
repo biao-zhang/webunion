@@ -33,7 +33,7 @@
   import wheader from './common/wheader'
   import wfooter from './common/wfooter'
   import CaptchaImage from './captchaImage'
-  import { checkEmail, checkPhone } from '../../../static/js/utils'
+  import { checkEmail, checkPhone } from '../../config/mUtils'
   import { uclogin } from '@/api/web/uc'
 
   export default {
@@ -52,6 +52,15 @@
         pwd: '',
         captcha: '',
         imgtoken: '',
+      }
+    },
+    created(){
+      let $this = this;
+      document.onkeydown=function(e) {
+        var key = window.event.keyCode;
+        if (key == 13) {
+          $this.login();
+        }
       }
     },
     methods: {

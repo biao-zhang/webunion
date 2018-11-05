@@ -72,7 +72,7 @@
 <script>
   import EHeader from '../common/eHeader'
   import { classall, add } from '@/api/admin/sl'
-  import { array_diff, removeObj } from "../../../../static/js/utils"
+  import { array_diff, removeObj } from "../../../config/mUtils"
   import { Checkbox, CheckboxGroup } from 'element-ui'
 
   export default {
@@ -184,9 +184,11 @@
         })
           .then(res => {
 
+            console.log('班级列表', res)
+
             if (res.result === '000000') {
 
-              this.classList = res.data.data.datas
+              this.classList = res.data.data.data
 
               this.classList.map( item => this.classNameList.push(item.className))
 
@@ -207,8 +209,6 @@
               })
 
             }
-
-            console.log('班级列表', res)
 
           })
       },

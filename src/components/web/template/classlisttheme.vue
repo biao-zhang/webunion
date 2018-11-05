@@ -5,9 +5,9 @@
         <th width="33%">文字名称</th>
         <th width="20%">价格</th>
       </tr>
-      <tr>
-        <td>优路教育网</td>
-        <td>2350.20</td>
+      <tr v-for="item in classList">
+        <td><a v-bind:href="item.advLink+'&referer='+referer" target="_blank">{{item.className}}</a></td>
+        <td>{{item.classPrice}}</td>
       </tr>
     </table>
     <get-adv-data :advId="advId" :advType="advType" :agentId="agentId" @transData="getdata"></get-adv-data>
@@ -23,7 +23,8 @@
         advId: this.$route.query.advId, //广告Id
         advType: this.$route.query.advType,//广告类型
         agentId:this.$route.query.agentId,//代理编号
-        classList:'',
+        referer:this.$route.query.referer,
+        classList:[],
       }
     },
     components:{

@@ -3,6 +3,7 @@
     <wheader></wheader>
     <div class="lm_lognbox">
       <div class="lm_register">
+        <form @keyup.enter="enter">
         <div class="rest_box">
           <div class="rest_tt"><span class="rest_sp"><i class="rest_fg"></i><strong>账号注册</strong></span></div>
           <div class="rest_lab">
@@ -52,9 +53,10 @@
           <label class="rest_xybox">
             <Checkbox v-model="checked"></Checkbox>&nbsp;阅读并同意<a href="" class="rest_xy">《用户注册协议》</a></label>
           <div class="rest_btnbox">
-            <input type="button" class="rest_btn" value="提 交" @click="submit"/>
+            <input type="button" class="rest_btn" value="提 交" @click="regist"/>
           </div>
         </div>
+        </form>
       </div>
     </div>
     <wfooter></wfooter>
@@ -96,15 +98,24 @@
         captchaScene:'ms_sms_verifyCode_send',//获取图片验证码场景
       }
     },
-    mounted(){
-      //console.log(this.captchaScene);
+    created(){
+      // let $this = this;
+      // document.onkeydown=function(e) {
+      //   var key = window.event.keyCode;
+      //   if (key == 13) {
+      //     $this.regist();
+      //   }
+      // }
     },
     methods:{
-      submit(){
+      enter(){
+        this.regist();
+      },
+      regist(){
         if(this.userLoginname===''){
           this.$alert('用户名不能为空', '提示', {
             confirmButtonText: '确定',
-            type: 'warning'
+            type: 'warning',
           });
           return false;
         }
@@ -155,6 +166,7 @@
             confirmButtonText: '确定',
             type: 'warning'
           });
+          return false;
         }
         if(!this.checked) {
           this.$alert('请先同意用户注册协议', '提示', {

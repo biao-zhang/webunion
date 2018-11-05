@@ -71,7 +71,6 @@
           <pagination
             background
             layout="prev, pager, next"
-            :current-page="pageIndex"
             :page-size="pageSize"
             :total="count"
             @current-change="handleCurCha"
@@ -98,7 +97,7 @@
     },
     data () {
       return {
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10,
         class_StartDate: '',
         class_EndDate: '',
@@ -206,7 +205,7 @@
 
               })
 
-              this.$router.push('/admin/lanmuListAll')
+              this._classlist()
 
             } else {
 
@@ -225,7 +224,7 @@
           })
       },
       handleCurCha (val) {
-        this.pageIndex = val
+        this.pageIndex = (val-1)*this.pageSize
         this._classlist()
       }
     }

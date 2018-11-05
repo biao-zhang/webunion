@@ -21,9 +21,9 @@
           </div>
           <div class="rest_lab">
             <span class="rest_name"><font>*</font>图片尺寸：</span>
-            <input type="number" class="rest_num"  v-model="advWidth"/>
+            <input type="number" class="rest_num"  v-model="advWidth" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" min="0"/>
             <span>*</span>
-            <input type="number" class="rest_num"  v-model="advHeight"/>
+            <input type="number" class="rest_num"  v-model="advHeight" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" min="0"/>
           </div>
           <div class="rest_lab">
             <span class="rest_name">上传图片：</span>
@@ -84,7 +84,7 @@
         advId:this.$route.query.advId,
         picWidth: '180px',
         picHeight: '180px',
-        imgSrc: require('@/assets/admin/images/add.png'),
+        imgSrc: require('@/assets/admin/images/upload.png'),
         file_imgSrc:'',
       }
     },
@@ -118,7 +118,7 @@
           });
           return false;
         }
-        if(this.advPicsize===''){
+        if(this.advWidth===''||this.advHeight===''){
           this.$alert('广告尺寸不能为空', '提示', {
             confirmButtonText: '确定',
             type: 'warning'

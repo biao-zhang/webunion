@@ -31,6 +31,9 @@ export default {
     if(!(params instanceof FormData)){
       params = qs.stringify(params);
     }
+    /*if(!header){
+      params = qs.stringify(params);
+    }*/
 
     //TOKEN
     let token = window.localStorage.getItem('adminToken');

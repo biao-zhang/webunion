@@ -16,32 +16,47 @@
             <input type="text" class="rest_inp" value="天天招生网" v-model="agentName" />
           </div>
           <div class="rest_lab">
+            <span class="rest_name"><font>*</font>用户姓名：</span>
+            <input type="text" class="rest_inp" value="天天招生网" v-model="userName" />
+          </div>
+          <div class="rest_lab">
             <span class="rest_name"><font>*</font>用 户 账 号：</span>
-            <input type="text" class="rest_inp" value="ttzsw" v-model="userLoginname" />
+            <input type="text" class="rest_inp" value="ttzsw" v-model="userLoginname" :disabled="type === 'modify'" />
+          </div>
+          <div class="rest_lab">
+            <span class="rest_name"><font>*</font>用户身份证号：</span>
+            <input type="text" class="rest_inp" value="ttzsw" v-model="userIdcard" />
           </div>
           <div class="rest_lab">
             <span class="rest_name"><font>*</font>手 机 号：</span>
-            <input type="text" class="rest_inp" value="18859623498" v-model="userMobile"/>
+            <input type="text" class="rest_inp" value="18859623498" v-model="userMobile" :disabled="type === 'modify'" />
           </div>
-         <!-- <div class="rest_lab">
-            <span class="rest_name"><font>*</font>密  码：</span>
-            <input type="password" class="rest_inp" value="******" />
-          </div>-->
           <div class="rest_lab">
             <span class="rest_name"><font>*</font>邮 箱：</span>
             <input type="text" class="rest_inp" value="11163709569@qq.com" v-model="userEmail"/>
           </div>
-          <!--<div class="rest_lab">-->
-            <!--<span class="rest_name"><font>*</font>账户余额：</span>-->
-            <!--<input type="text" class="rest_inp" value="126.00" />-->
-          <!--</div>-->
-          <!--<div class="rest_lab">-->
-            <!--<span class="rest_name">提成比例：</span>-->
-            <!--<input type="text" class="rest_inp" value="20%" />-->
-          <!--</div>-->
+          <div class="rest_lab">
+            <span class="rest_name"><font>*</font>代理商收款人：</span>
+            <input type="text" class="rest_inp" value="11163709569@qq.com" v-model="agentReceiptperson"/>
+          </div>
+          <div class="rest_lab">
+            <span class="rest_name"><font>*</font>收 款 银 行：</span>
+            <input type="text" class="rest_inp" value="11163709569@qq.com" v-model="agentReceiptbankname"/>
+          </div>
+          <div class="rest_lab">
+            <span class="rest_name"><font>*</font>收 款 账 户：</span>
+            <input type="text" class="rest_inp" value="11163709569@qq.com" v-model="agentReceiptaccountno"/>
+          </div>
           <div class="rest_lab">
             <span class="rest_name">有 效 期：</span>
-            <input type="text" class="rest_inp" value="2019-09-27   10:45" v-model="agentSignexpiredate" />
+            <!--<input type="text" class="rest_inp" value="2019-09-27   10:45" v-model="agentSignexpiredate" />-->
+            <date-picker
+              v-model="agentSignexpiredate"
+              type="datetime"
+              format="yyyy-MM-dd hh:mm:ss"
+              value-format="yyyy-MM-dd hh:mm:ss"
+            >
+            </date-picker>
           </div>
           <div class="rest_lab">
             <span class="rest_name">状  态：</span>
@@ -63,13 +78,14 @@
 
 <script>
   import EHeader from '../common/eHeader'
-  import { agentinfo, agentedit } from '@/api/admin/sl'
-  import { agentadd } from '@/api/admin/uc'
+  import { agentinfo, agentedit, agentadd } from '@/api/admin/sl'
+  import { DatePicker } from 'element-ui'
 
   export default {
     name: 'addAgent',
     components: {
-      EHeader
+      EHeader,
+      DatePicker,
     },
     data () {
       return {
@@ -82,6 +98,11 @@
         userEmail: '',
         agentSignexpiredate: '',
         agentAuthstatus: 'W',
+        userName: '',
+        userIdcard: '',
+        agentReceiptperson: '',
+        agentReceiptbankname: '',
+        agentReceiptaccountno: '',
       }
     },
     mounted () {
@@ -101,7 +122,7 @@
 
         } else {
 
-          // TODO
+          this._agentadd()
 
         }
 
@@ -134,6 +155,16 @@
 
               this.agentAuthstatus = res.data.agentAuthstatus
 
+              this.userName = res.data.userName
+
+              this.userIdcard = res.data.userIdcard
+
+              this.agentReceiptperson = res.data.agentReceiptperson
+
+              this.agentReceiptbankname = res.data.agentReceiptbankname
+
+              this.agentReceiptaccountno = res.data.agentReceiptaccountno
+
             } else {
 
               this.$alert(res.msg, '提示', {
@@ -155,8 +186,14 @@
           userMobile: this.userMobile,
           userEmail: this.userEmail,
           agentSignexpiredate: this.agentSignexpiredate,
-          agentAuthstatus: this.agentAuthstatus
+          agentAuthstatus: this.agentAuthstatus,
+          userName: this.userName,
+          userIdcard: this.userIdcard,
+          agentReceiptperson: this.agentReceiptperson,
+          agentReceiptbankname: this.agentReceiptbankname,
+          agentReceiptaccountno: this.agentReceiptaccountno,
         }
+
         agentedit({
           params: JSON.stringify(params)
         })
@@ -186,13 +223,40 @@
       },
       _agentadd () {
         let params = {
-          userName: '',
-          userLoginname: '',
+          agentName: this.agentName,
+          userLoginname: this.userLoginname,
+          userMobile: this.userMobile,
+          userEmail: this.userEmail,
+          agentSignexpiredate: this.agentSignexpiredate,
+          agentAuthstatus: this.agentAuthstatus,
+          userName: this.userName,
+          userIdcard: this.userIdcard,
+          agentReceiptperson: this.agentReceiptperson,
+          agentReceiptbankname: this.agentReceiptbankname,
+          agentReceiptaccountno: this.agentReceiptaccountno,
         }
         agentadd({
           params: JSON.stringify(params)
         })
           .then( res => {
+
+            if (res.result === '000000') {
+
+              this.$message({
+                type: 'success',
+                message: '添加成功'
+              })
+
+              this.$router.push('/admin/agentListAll')
+
+            } else {
+
+              this.$alert(res.msg, '提示', {
+                confirmButtonText: '确定',
+                type: 'warning'
+              })
+
+            }
 
             console.log('代理商添加', res)
 

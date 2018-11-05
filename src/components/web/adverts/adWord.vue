@@ -56,7 +56,7 @@
         value:'',
         advType:'1',//广告类型：1文字广告
         advName:'',//广告名称
-        pageIndex:1,//当前页码
+        pageIndex:0,//当前页码
         pageSize:8,//每页显示数量
         count:0,//总数量
         textadvlist:'',//
@@ -102,7 +102,7 @@
         this.projectId = msg;
       },
       handleCurrentChange(val){
-        this.pageIndex = val;
+        this.pageIndex = (val-1)*this.pageSize;
         this.query();
       },
       getShow(msg){

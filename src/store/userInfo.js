@@ -23,6 +23,10 @@ const userInfo = {
 
           commit('WEB_USERINFO', res)
 
+        } else {
+
+          localStorage.setItem('token', '')
+
         }
 
         console.log('个人信息', res)

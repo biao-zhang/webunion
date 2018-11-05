@@ -32,6 +32,7 @@
             <th width="10%">登记时间</th>
             <th width="10%">审核状态</th>
             <th width="5%">网站介绍</th>
+            <th width="5%">网站备案信息</th>
             <th width="12%">操作</th>
           </tr>
           <!--<tr v-if="count===0"><td colspan="10">暂无数据！</td></tr>-->
@@ -44,8 +45,9 @@
             <td v-if="item.agentsiteAuthstatus === 'Y'">审核成功</td>
             <td v-if="item.agentsiteAuthstatus === 'N'">审核失败</td>
             <td>{{item.agentsiteMemo}}</td>
+            <td>{{item.agentsiteIcp}}</td>
             <td>
-              <a href="javascript:void(0);" class="lma_a" @click="reviewOper">审核</a>
+              <a href="javascript:void(0);" class="lma_a" @click="reviewOper(item.agentsiteId)">审核</a>
             </td>
             <Dialog
               title="审核"
@@ -59,7 +61,7 @@
                 <label class="stk_lab" :class="{check: tabIndex === 'N'}" @click="review('N')">审核不通过</label>
               </div>
               <div slot="footer" class="rest_btnbox" style="text-align: center; padding: 0">
-                <input type="button" class="rest_btn" value="提 交" @click="submit" />
+                <input type="button" class="rest_btn" value="提 交" @click="submit(item.agentsiteId)" />
               </div>
             </Dialog>
           </tr>
@@ -85,6 +87,7 @@
         dialogVisible: false,
         checked: false,
         arrAgentsite: '',
+        agentsiteId: '',
       }
     },
     props: ['itemChildren'],
@@ -95,8 +98,9 @@
       review (val) {
         this.tabIndex = val
       },
-      reviewOper () {
+      reviewOper (agentsiteId) {
         this.innerVisible = true
+        this.agentsiteId = agentsiteId
       },
       webInfo () {
         this.dialogVisible = true
@@ -152,10 +156,11 @@
       },
       _agentsiteauth () {
         let params = {
-          agentsiteIds: this.itemChildren.agentId,
+          agentsiteIds: this.agentsiteId,
           agentsiteAuthstatus: this.tabIndex,
           agentsiteAuthmemo: '',
         }
+        console.log(params)
         agentsiteauth({
           params: JSON.stringify(params),
         })
@@ -169,7 +174,7 @@
 
               this.$message({
                 type: 'success',
-                message: '审核成功'
+                message: '已审核'
               })
 
             } else {

@@ -42,3 +42,39 @@ export const advcode = (params) => {
 export const advdata = (params) => {
   return http.fetchPost(`${baseUrl}/adv/data`,params)
 }
+//代理商网站列表
+export const agentsitelist = (params) => {
+  return http.fetchPost(`${baseUrl}/agentsite/list`,params)
+}
+//代理商网站添加
+export const agentsiteadd = (params) => {
+  return http.fetchPost(`${baseUrl}/agentsite/add`,params)
+}
+//获取代理商网站信息
+export const agentsiteinfo = (params) => {
+  return http.fetchPost(`${baseUrl}/agentsite/info`,params)
+}
+//代理商网站修改
+export const agentsiteedit = (params) => {
+  return http.fetchPost(`${baseUrl}/agentsite/edit`,params)
+}
+//代理商网站删除
+export const agentsitedelete = (params) => {
+  return http.fetchPost(`${baseUrl}/agentsite/delete`,params)
+}
+//当前代理商信息
+export const agentsitecurrent = (params) => {
+  return http.fetchPost(`${baseUrl}/agent/current`,params)
+}
+//代理商信息完善
+export const agentedit = (params) => {
+  return http.fetchPost(`${baseUrl}/agent/edit`,params)
+}
+//获取PVUV统计数据
+export const advstatistics = (params) => {
+  return http.fetchPost(`${baseUrl}/adv/statistics`,params)
+}
+//获取代理商统计信息
+export const agentgetagentdata = (params) => {
+  return http.fetchPost(`${baseUrl}/agent/getagentdata`,params)
+}

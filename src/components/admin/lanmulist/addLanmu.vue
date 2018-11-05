@@ -163,7 +163,7 @@
       _classedit () {
         let params = {
           classId: this.classId,
-          className: this.className,
+          className: this.lanmuName,
           classAvlstatus: this.tabIndex,
         }
         classedit({

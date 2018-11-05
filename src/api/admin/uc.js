@@ -11,9 +11,3 @@ export const profileview = (params) => {
   return http.fetchPost(`${baseUrl}/user/profile/view`,params)
 }
 
-
-// 添加用户(代理商)
-
-export const agentadd = (params) => {
-  return http.fetchPost(`${baseUrl}/add`,params)
-}

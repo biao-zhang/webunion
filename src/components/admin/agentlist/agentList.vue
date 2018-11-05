@@ -87,7 +87,6 @@
           <pagination
             background
             layout="prev, pager, next"
-            :current-page="pageIndex"
             :page-size="pageSize"
             :total="count"
             @current-change="handleCurCha"
@@ -120,7 +119,7 @@
         allchecked: false, // 全选
         tabIndex: 'Y',
         dialogVisible: false,
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10,
         count: 0, // 总条目数
         adv_StartDate: '',
@@ -290,6 +289,10 @@
 
           })
       },
+      handleCurrentChange(val){
+        this.pageIndex = (val-1)*this.pageSize;
+        this._agentlist();
+      }
     }
 }
 </script>

@@ -64,7 +64,7 @@
                 <td v-if="item.articleAvlstatus==='Y'">正常</td>
                 <td v-else>禁用</td>
                 <td>{{item.articleInputer}}</td>
-                <td>2018-08-27 10:45</td>
+                <td>{{item.articleInputertime}}</td>
                 <td>
                   <a href="javascript:void(0);" class="lma_a" @click="addConsult('update',item.articleId)">修改</a>
                   <a href="javascript:void(0);" class="lma_a" @click="del(item.articleId)">删除</a>
@@ -112,7 +112,7 @@
         startInputertime:'',//开始时间
         endInputertime:'',//结束时间
         articleAvlstatusOptions:[{value:"Y",label:"正常"},{value:"N",label:"禁用"}],
-        pageIndex:1,//当前页
+        pageIndex:0,//当前页
         pageSize:8,//每页显示数量
         count:0,//总数量
         articleList:[],
@@ -127,7 +127,14 @@
         this._articlelist();
       },
       del(articleId){
-        this._articledelete(articleId);
+        this.$confirm('确定删除吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this._articledelete(articleId);
+        }).catch(() => {
+        });
       },
       addConsult (type,id) {
         if(type==="add"){
@@ -184,7 +191,7 @@
         })
       },
       handleCurrentChange(val){
-        this.pageIndex = val;
+        this.pageIndex = (val-1)*this.pageSize;
         this.query();
       }
     }

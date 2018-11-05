@@ -133,8 +133,6 @@
     data:function () {
       return {
         file_imgSrc: this.GLOBAL.file_imgSrc,
-        pageIndex: 1,
-        pageSize: 1,  // 按需设置广告数
         url : require('@/assets/web/images/ad.jpg'),
         fontSize: 30,
         advboardId: 'ADVBOARD20181026010000000001', // 中部图片
@@ -149,8 +147,6 @@
         let params = {
           advboardId: id,
           advAvlstatus: 'Y',
-          pageIndex: this.pageIndex,
-          pageSize: this.pageSize,
         }
         advlist({
           params: JSON.stringify(params)

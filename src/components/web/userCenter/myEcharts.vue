@@ -15,18 +15,30 @@
       name: "myEcharts",
       data() {
         return {
-          typeName: '',
-          chartDatas: [],
+          xAxisName : '',
+          xAxisDate : '',
+          yAxisDate : '',
         }
       },
-      props:{
-        typeName:String,
-        chartDatas:Array
+      props:['datas'],
+      watch:{
+        datas: {
+          handler() {
+            this.init();
+          },
+          deep: true
+        }
       },
       mounted() {
-        this.drawLine();
+        this.init();
       },
       methods: {
+        init(){
+          this.xAxisName = this.datas.typeName;
+          this.xAxisDate = this.datas.xdata;
+          this.yAxisDate = this.datas.ydata;
+          this.drawLine();
+        },
         drawLine() {
           // 基于准备好的dom，初始化echarts实例
           let myChart = echarts.init(document.getElementById('exchart'))
@@ -34,10 +46,10 @@
           myChart.setOption({
             tooltip: {},
             xAxis: {
-              name:'小时',
+              name:this.xAxisName,
               type : 'category',
               boundaryGap: false,
-              data: ['4', '8', '12', '16', '20', '24'],
+              data:this.xAxisDate,
               axisLabel: {
                 show: true,
                 textStyle: {
@@ -51,7 +63,7 @@
               }
             },
             yAxis: {
-              name:this.typeName,
+              name:'浏览量',
               type: 'value',
               axisLabel: {
                 show: true,
@@ -75,7 +87,7 @@
               }
             },
             series: [{
-              data: this.chartDatas,
+              data: this.yAxisDate,
               type: 'line',
               itemStyle: {
                 color: '#fc706c'

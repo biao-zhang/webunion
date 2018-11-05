@@ -4,7 +4,7 @@
       <div class="lmh_logo"><img src="@/assets/web/images/logo.png"/></div>
       <ul class="lmh_ul">
         <li :class="{active: tabIndex === 'web'}"><router-link to="/web">联盟首页</router-link></li>
-        <li :class="{active: tabIndex === 'cooperAd'}"><a href="javascript:void(0)" @click="isLogin('cooperAd')">合作介绍</a></li>
+        <li :class="{active: tabIndex === 'cooperAd'}"><a href="javascript:void(0)" @click="isLogin('/web/cooperAd')">合作介绍</a></li>
         <li :class="{active: tabIndex === 'helpCenter'}"><router-link to="/web/helpCenter">帮助中心</router-link></li>
       </ul>
       <div class="lmh_login" v-if="!token">
@@ -36,26 +36,27 @@
       arrUserInfo: state => state.userInfo.arrUserInfo
     }),
     mounted(){
-      var arr = this.$route.path.split("/");
+      let arr = this.$route.path.split("/");
       this.tabIndex = arr[arr.length-1];
-      if(this.tabIndex==='cooperAd') this.isLogin('cooperAd');
-
+      if(this.tabIndex==='cooperAd') this.isLogin();
+      if(this.tabIndex==='userCenter') this.isLogin();
       this.token = window.localStorage.getItem('token');
 
       this.$store.dispatch('getUserInfo')
     },
     methods:{
       userCenter () {
-        this.$router.push('/web/userCenter')
+        this.$router.push('/web/userCenter?curId=1')
       },
       quit () {
         window.localStorage.setItem('token', '')
         this.token = window.localStorage.getItem('token');
+        this.$router.push('/web')
       },
       isLogin(url){
-
+        this.token = window.localStorage.getItem('token');
         if(this.token){
-          this.$router.push('/web/'+url);
+          if(url) this.$router.push(url);
         }else{
           this.$alert('请先登录', '提示', {
             confirmButtonText: '确定',

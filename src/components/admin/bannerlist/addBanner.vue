@@ -9,9 +9,14 @@
         <div class="rest_box">
 
           <div class="rest_lab">
-            <span class="rest_name">外部链接：</span>
-            <label class="stk_lab" :class="{check: tabIndex === 'picad'}" @click="singleBtn('picad')">图片广告</label>
-            <label class="stk_lab" :class="{check: tabIndex === 'slidead'}" @click="singleBtn('slidead')">幻灯广告</label>
+            <span class="rest_name">广告类型：</span>
+            <label class="stk_lab" :class="{check: tabIndex === 'T'}" @click="singleBtn('T')">图片广告</label>
+            <label class="stk_lab" :class="{check: tabIndex === 'H'}" @click="singleBtn('H')">幻灯广告</label>
+          </div>
+          <div class="rest_lab">
+            <span class="rest_name">广告位置：</span>
+            <label class="stk_lab" :class="{check: pos === 'ADVBOARD20181024010000000002'}" @click="position('ADVBOARD20181024010000000002')">顶部</label>
+            <label class="stk_lab" :class="{check: pos === 'ADVBOARD20181026010000000001'}" @click="position('ADVBOARD20181026010000000001')">中部</label>
           </div>
           <div class="rest_lab">
             <span class="rest_name">广告名称：</span>
@@ -58,10 +63,11 @@
     },
     data () {
       return {
-        tabIndex: 'picad',
+        tabIndex: 'T',
+        pos: 'ADVBOARD20181024010000000002',
         picWidth: '180px',
         picHeight: '180px',
-        imgSrc: require('@/assets/admin/images/add.png'),
+        imgSrc: require('@/assets/admin/images/upload.png'),
 
         filePath: '', // 图片路径
         type: '',  // 来源
@@ -69,7 +75,7 @@
         advName: '', // 广告名称
 
         adLook: [], // 广告查看
-        serverSrc: this.GLOBAL.serverSrc
+        serverSrc: this.GLOBAL.file_imgSrc
       }
     },
     mounted () {
@@ -81,6 +87,9 @@
       console.log('type', this.type, 'advId', this.advId)
     },
     methods: {
+      position (val) {
+        this.pos = val
+      },
       submit () {
         if (this.type === 'update') {
 
@@ -171,10 +180,11 @@
       // 添加
       _advadd () {
         let params = {
-          advboardId: 'ADVBOARD20181024010000000002',
+          advboardId: this.pos,
           advName: this.advName,
           advLinkurl: '',
           advPicpath: this.filePath,
+          advType: this.tabIndex,
         }
 
         console.log('params', params)
@@ -192,6 +202,13 @@
               })
 
               this.$router.push('/admin/bannerListAll')
+
+            } else {
+
+              this.$alert(res.msg, '提示', {
+                confirmButtonText: '确定',
+                type: 'warning'
+              })
 
             }
 
@@ -215,6 +232,8 @@
 
               this.advName = this.adLook.advName
 
+              this.filePath = this.adLook.advPicpath
+
               this.imgSrc = this.serverSrc + this.adLook.advPicpath
 
             } else {
@@ -237,9 +256,11 @@
       _advedit () {
         let params = {
           advId: this.advId,
-          advboardId: 'ADVBOARD20181024010000000002',
+          advboardId: this.pos,
           advName: this.advName,
           advPicpath: this.filePath,
+          advAvlstatus: 'Y',
+          advDelstatus: 'Y', // 广告删除状态
         }
         advedit({
           params: JSON.stringify(params)

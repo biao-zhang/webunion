@@ -10,7 +10,7 @@
             <label class="lma_lab">广告名称：<input type="text" class="lma_inp" v-model="advName"></label>
             <label class="lma_lab">状态：
               <div style="display: inline-block;position: relative;">
-                <Select v-model="value1" placeholder="请选择">
+                <Select v-model="value1" placeholder="请选择" @change="change">
                   <Option
                     :key="item.value"
                     v-for="item in options1"
@@ -47,7 +47,8 @@
                 <tr>
                   <th width="10%">编号</th>
                   <th width="20%">广告名称</th>
-                  <th width="15%">图片</th>
+                  <th width="5%">图片</th>
+                  <th width="5%">广告位置</th>
                   <th width="10%">广告类型</th>
                   <th width="10%">前台显示状态</th>
                   <th width="10%">创建人</th>
@@ -59,9 +60,10 @@
                   <td>{{item.advId}}</td>
                   <td>{{item.advName}}</td>
                   <td><img :src="file_imgSrc + item.advPicpath" class="lma_img"></td>
-                  <td>图片广告</td>
+                  <td>{{ item.ADVBOARDNAME}}</td>
+                  <td>{{item.advType === 'T' ? '图片广告' : '幻灯广告'}}</td>
                   <td>{{ item.advAvlstatus === 'Y' ? '是' : '否' }}</td>
-                  <td>shl</td>
+                  <td></td>
                   <td>{{item.advCreatedate}}</td>
                   <td>
                     <a href="javascript:void(0);" class="lma_a" @click="operate('lookList', item.advId)">查看</a>
@@ -77,7 +79,6 @@
             <pagination
               background
               layout="prev, pager, next"
-              :current-page="pageIndex"
               :page-size="pageSize"
               :total="count"
               @current-change="handleCurCha"
@@ -91,7 +92,8 @@
 <script>
   import EHeader from '../common/eHeader'
   import { Select, Option, Pagination, DatePicker } from 'element-ui'
-  import { advlist, advedit, advdelete } from '@/api/admin/cm'
+  import { advlist, advedit, advdelete, advavlstatus } from '@/api/admin/cm'
+  
 
   export default {
     name: "bannerList",
@@ -105,7 +107,7 @@
     data () {
       return {
         file_imgSrc: this.GLOBAL.file_imgSrc,
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10,
         adv_StartDate: '',
         adv_EndDate: '',
@@ -122,12 +124,16 @@
         advName: '', // 广告名称
         arrBanner: [],
         count: 0, // 总条目数
+        advAvlstatus: '',
       }
     },
     mounted () {
       this._advlist()
     },
     methods: {
+      change (val) {
+        this.advAvlstatus = val
+      },
       operate (val1, val2, status) {
         switch (val1) {
           case 'lookList':
@@ -142,9 +148,7 @@
                   type: 'warning'
                 }).then(() => {
 
-                  this._advedit(val2, 'N')
-
-                  this._advlist()
+                  this._advavlstatus(val2, 'N')
 
                 })
               } else {
@@ -154,10 +158,7 @@
                   type: 'warning'
                 }).then(() => {
 
-                  this._advedit(val2, 'Y')
-
-                  this._advlist()
-
+                  this._advavlstatus(val2, 'Y')
 
                 })
               }
@@ -172,8 +173,6 @@
               }).then(() => {
 
                 this._advdelete(val2)
-
-                this._advlist()
 
               })
             }
@@ -192,9 +191,9 @@
       // 广告列表
       _advlist () {
         let params = {
-          advboardId: 'ADVBOARD20181024010000000002', // 广告位置
+          // advboardId: '', // 广告位置
           advName: this.advName,
-          advAvlstatus: this.value1,
+          advAvlstatus: this.advAvlstatus,
           advCreatedate_start: this.adv_StartDate,
           advCreatedate_end: this.adv_EndDate,
           advDelstatus: 'Y', // 广告删除状态
@@ -226,13 +225,12 @@
           })
       },
       // 是否前台显示
-      _advedit (id, av) {
+      _advavlstatus (id, advAvlstatus) {
         let params = {
           advId: id,
-          advboardId: 'ADVBOARD20181024010000000002', // 广告标识
-          advAvlstatus: av, // 广告启用状态
+          advAvlstatus: advAvlstatus, // 广告启用状态
         }
-        advedit({
+        advavlstatus({
           params: JSON.stringify(params)
         })
           .then( res => {
@@ -243,6 +241,9 @@
                 type: 'success',
                 message: '修改成功!'
               })
+
+
+              this._advlist()
 
             } else {
 
@@ -272,12 +273,14 @@
               message: '删除成功!'
             })
 
+            this._advlist()
+
             console.log('广告删除', res)
 
           })
       },
       handleCurCha (val) {
-        this.pageIndex = val
+        this.pageIndex = (val-1)*this.pageSize
         this._advlist()
       }
     }

@@ -109,7 +109,7 @@
         adv_EndDate:"",//结束时间
         advAvlstatus:'',//状态
         advStatusOptions:[{value:"Y",label:"正常"},{value:"N",label:"禁用"}],
-        pageIndex:1,//当前页码
+        pageIndex:0,//当前页码
         pageSize:8,//每页显示数量
         textadvlist:[{
           advId:'0526389',
@@ -174,7 +174,7 @@
         this.projectId = msg;
       },
       handleCurrentChange(val){
-        this.pageIndex = val;
+        this.pageIndex = (val-1)*this.pageSize;
         this.query();
       }
     }
